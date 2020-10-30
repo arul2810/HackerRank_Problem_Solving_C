@@ -1,53 +1,40 @@
 //
 // HackerRank Minimum Swaps 2 Problem
 // Created by hello@arulprakash.dev on 9/30/2020.
-// Program not Verified to Work on HackerRank
-// Program working for some test cases on HackerRank - Needs Optimisation
+// Program  Verified to Work on HackerRank
+//
 
 #include "iostream"
-#include "vector"
 using namespace std;
 
 int main(){
 
-    int size;
-    cin >> size ;
-    int *array = new int[size];
-
-    // Getting Inputs
-
-    for (int i = 0; i < size ; i++) {
+    int length;
+    cin >> length;
+    int *array = new int[length];
+    for(int i = 1 ; i <= length ; i++){
         cin >> array[i];
     }
-
-    int swaps = 0;
-    int min;
-    int min_index;
-    for(int i=0; i < size; i++){
-
-        min = array[i];
-        min_index = i;
-
-        for(int j = i+1 ; j < size ; j++){
-
-            if(min > array[j]){
-                min = array[j];
-                min_index = j;
-
+    int i = 1;
+    int count = 0;
+    int temp;
+    while(i<=length){
+        if(array[i] != i){
+            count = count + 1;
+            temp =  array[i];
+            array[i] = array[temp];
+            array[temp] = temp;
+            while (array[i] != i){
+                count = count+1;
+                temp =  array[i];
+                array[i] = array[temp];
+                array[temp] = temp;
             }
-
-        }
-        if(min_index != i){
-
-            int temp;
-            temp = array[i];
-            array[i] = array[min_index];
-            array[min_index] = temp;
-            swaps = swaps + 1;
-
+        }else{
+            i = i + 1;
         }
     }
+    cout << count;
 
-    cout << swaps;
 
 }
